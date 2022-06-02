@@ -1,0 +1,14 @@
+{
+  "urls": [
+    "https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/",
+    "https://www.allrecipes.com/recipe/244716/shirataki-meatless-meat-pad-thai/",
+    "https://www.allrecipes.com/recipe/16167/beef-bourguignon-i/",
+    "https://www.allrecipes.com/recipe/228285/teriyaki-salmon/"
+  ],
+  "commands": [
+    "vegetarian",
+    "non-vegetarian",
+    "healthy",
+    "unhealthy"
+  ]
+}
