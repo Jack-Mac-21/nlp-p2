@@ -10,6 +10,7 @@ from DataClassFile import FoodDataClass
 
 
 # Given a url this function returns a list of ingredients as a dictionary
+# [{"name", "quantity", "measurement"}, ... ]
 def get_ingredients(url=None) -> List[str]:
     ingredients = []
     page = requests.get(url)
@@ -49,7 +50,7 @@ def get_steps(url=None) -> List[str]:
 
     return steps
 
-# Helper function, finds the quantity for an ingredient
+# Helper function for get_ingredients, finds the quantity for an ingredient
 def get_quantity_measurement(ingrediant_str):
     split_str = re.split(' ', ingrediant_str)
 
