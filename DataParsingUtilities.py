@@ -24,7 +24,6 @@ def get_ingredients(url=None) -> List[str]:
         ingred_text = ingred_text.replace("\u2009" , "")
         ingredient_name = ingred_text
         ingredient_quantity, ingredient_unit = get_quantity_measurement(ingred_text)
-        ingredients.append(ingred_text)
         ingredient = {
             "name": ingredient_name,
             "quantity" : ingredient_quantity,

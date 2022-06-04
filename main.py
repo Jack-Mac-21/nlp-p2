@@ -2,6 +2,7 @@
 from RecipeParserClass import RecipeParser
 from DataParsingUtilities import *
 import json
+import StringOutputGenerator
 
 # Pass in a URL and it will return a dictionar 
 # {"ingredients": ingredients_dictionary, "steps" : list of steps, 
@@ -79,6 +80,11 @@ if __name__ == "__main__":
         parsed_original_recipes.append(parsed_recipe)
 
     example_parsed_recipe = parsed_original_recipes[0] # to test out making a transformation on one recipe at a time
+
+    print(example_parsed_recipe)
+
+    output_string = StringOutputGenerator.create_string_from_recipe(example_parsed_recipe)
+    print(output_string)
 
     transformed_recipe = transform_parsed_recipe(example_parsed_recipe)
     
