@@ -64,18 +64,22 @@ def transform_non_vegetarian(parsed_recipe):
     raise NotImplementedError
 
 def transform_healthy(parsed_recipe):
-    ingredient_substitutes = {"bacon":["shiitake mushrooms", "sun-dried tomatoes", "smoked paprika"],
-                              "butter":["olive oil"],
-                              "beef chuck roast":["flank steak"],
-                              "flour":["whole-wheat flour"],
-                              "beef broth": ["low sodium beef broth"],
-                              "chicken broth": ["low sodium chicken broth"],
-                              "vegetable broth": ["low sodium vegetable broth"],}
+    ingredient_substitutes = {
+        "bacon":["shiitake mushrooms", "sun-dried tomatoes", "smoked paprika"],
+        "butter":["olive oil"],
+        "beef chuck roast":["flank steak"],
+        "flour":["whole-wheat flour"],
+        "beef broth": ["low sodium beef broth"],
+        "chicken broth": ["low sodium chicken broth"],
+        "vegetable broth": ["low sodium vegetable broth"],
+        "sugar": ["sugar"],
+        }
     ingredient_conversions = {
         "bacon":[2, 2, 4],
         "butter":[1],
         "beef chuck roast":[1],
-        "flour":[1]
+        "flour":[1],
+        "sugar":[.75]
     }
     ingredient_meas = {
         "shiitake mushrooms":"pounds",
@@ -87,7 +91,6 @@ def transform_healthy(parsed_recipe):
     }
     ingredient_methods = {
         "butter":"melt"
-        
     }
 
     # replace ingredients
