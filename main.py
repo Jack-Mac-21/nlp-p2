@@ -58,7 +58,31 @@ def transform_parsed_recipe(parsed_recipe):
 ####Implement the tranformation functions here
 ####
 def transform_vegetarian(parsed_recipe):
-    raise NotImplementedError
+    food_dict = {
+            "protein" : ["chicken", "fish", "salmon", "shrimp", "steak", "beef", "tofu", "pork", "bacon", "meat", "ground beef"],
+            "vegtable_proteing" : ["tofu", "impossible meat", "veggie burger", "plant based burger"],
+            "vegtables" : ["carrots", "onions", "broccoli", "cauliflower", "spinach", "lettuce", "tomato", "broccolini"]
+            
+        }
+    proteinMap = [["ground beef", "tofu"]]
+    changed = []
+    ingredients = parsed_recipe['ingredients']
+    steps = parsed_recipe['steps']
+
+    for i in range(len(proteinMap)):
+        for j in range(len(ingredients)):
+            if proteinMap[i][0] in ingredients[j]['name']:
+                t = ingredients[j]['name']
+                t = t.replace(proteinMap[i][0], proteinMap[i][1])
+                ingredients[j]['name'] = t
+        for k in range(len(steps)):
+            if proteinMap[i][0] in steps[k]:
+                t =steps[k]
+                t = t.replace(proteinMap[i][0], proteinMap[i][1])
+                steps[k] = t
+               # print(ingredients)
+    print(ingredients)
+    print(steps)
 
 def transform_non_vegetarian(parsed_recipe):
     raise NotImplementedError
