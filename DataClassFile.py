@@ -8,12 +8,14 @@ class FoodDataClass():
             
         }
         self.measurements = ["teaspoons", "teaspoon", "ounce", "ounces", "tablespoon", "tablespoons", "cups", "cup", "pint","pints",
-        "quarts", "quart", "pound", "pounds" "grams", "gram"]
+        "quarts", "quart", "pound", "pounds", "grams", "gram"]
 
         self.methods = ["bake", "broil", "sauté", "saute", "whisk", "scramble", "fold", "grate", "shred", "blend", "mix", "cover", "blend"]
 
         self.tools = ["pan", "skillet", "spatula", "whisk", "pot", "ladle", "knife", "cutting board", "strainer", "slotted spoon", "tongs", "julienne",
                     "grater", "shredder", "blender", "saucepan", "oven"]
+
+        self.cooking_stlyes = []
 
             
     
