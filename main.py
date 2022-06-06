@@ -62,6 +62,7 @@ def transform_healthy(parsed_recipe):
 
 def transform_unhealthy(parsed_recipe):
     raise NotImplementedError
+
 ####
 
 

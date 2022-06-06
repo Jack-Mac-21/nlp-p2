@@ -21,7 +21,21 @@ def get_ingredients(soup=None) -> List[str]:
         ingred_text = ingred.text
         ingred_text = ingred_text.replace("\u2009" , "")
         ingredient_name = ingred_text
+
         ingredient_quantity, ingredient_unit = get_quantity_measurement(ingred_text)
+
+        #if we have a quantity, cut off the measurement and units
+        if ingredient_quantity > 0:
+            split_ingred = ingred_text.split(" ")
+            ingredient_name = ""
+            for word in split_ingred[1::]:
+                if word not in FoodDataClass().measurements:
+                    ingredient_name += word + " "
+            ingredient_name = ingredient_name.rstrip()
+        else:
+            ingredient_quantity = "To Taste"
+            ingredient_unit = ""
+
         ingredient = {
             "name": ingredient_name,
             "quantity" : ingredient_quantity,
