@@ -3,20 +3,25 @@ from RecipeParserClass import RecipeParser
 from DataParsingUtilities import *
 import json
 import StringOutputGenerator
+from bs4 import BeautifulSoup
 
 # Pass in a URL and it will return a dictionar 
 # {"ingredients": ingredients_dictionary, "steps" : list of steps, 
 # "tools" : list of tools, *not implemented yet
 # "methods": list of methods *not implemented yet
 # "primary method": primary_method} #not implemented yet
-def parse_recipe(url=None, transformation="None"):
-    ingredients = get_ingredients(url)
-    steps = get_steps(url)
+def parse_recipe(soup=None, url=None, transformation="None"):
+    ingredients = get_ingredients(soup=soup)
+    title = get_title(soup=soup)
+    steps = get_steps(soup=soup)
+    tools = get_tools(steps)
+
     
     parsed_recipe = {"url" : url,
+                     "title" : title,
                      "ingredients" : ingredients,
                      "steps": steps,
-                     "tools" : None,
+                     "tools" : tools,
                      "primary method": None,
                      "methods" : None,
                      "transformation" : transformation
@@ -76,12 +81,14 @@ if __name__ == "__main__":
     parsed_original_recipes = [] # List of the parsed recipes as they were originally
 
     for url_command in url_command_list:
-        parsed_recipe = parse_recipe(url_command[0], transformation=url_command[1])
+        page = requests.get(url_command[0])
+        soup = BeautifulSoup(page.content, "html.parser")
+
+        parsed_recipe = parse_recipe(soup=soup, url=url_command[0], transformation=url_command[1])
         parsed_original_recipes.append(parsed_recipe)
 
-    example_parsed_recipe = parsed_original_recipes[0] # to test out making a transformation on one recipe at a time
+    example_parsed_recipe = parsed_original_recipes[2]  # to test out making a transformation on one recipe at a time
 
-    print(example_parsed_recipe)
 
     output_string = StringOutputGenerator.create_string_from_recipe(example_parsed_recipe)
     print(output_string)
