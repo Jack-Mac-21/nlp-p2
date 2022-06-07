@@ -96,13 +96,24 @@ def get_tools(steps):
     for step in steps:
         split_step = re.split(r'[ .,\'()]', step)
         for word in split_step:
-            if word in data_class.tools:
+            if word.lower in data_class.tools:
                 tools.add(word)
     
     return tools
+
+# Getting the methods of cooking given a list of steps object
+# it will return a set of methods used in the process
+def get_methods(steps):
+    methods = {}
+
+    for step in steps:
+        for word in re.split(r'[ .,\']',step):
+            if word.lower() in FoodDataClass().methods:
+                methods[word.lower()] = methods.get(word, 0) + 1
+    return methods
+
 
 if __name__ == "__main__":
     ingredients = get_ingredients(url="https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/")
     steps = get_steps(url = "https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/")
     tools = get_tools(steps)
-    print(tools)

@@ -17,6 +17,7 @@ def parse_recipe(soup=None, url=None, transformation="None"):
     title = get_title(soup=soup)
     steps = get_steps(soup=soup)
     tools = get_tools(steps)
+    methods = get_methods(steps)
 
     
     parsed_recipe = {"url" : url,
@@ -25,7 +26,7 @@ def parse_recipe(soup=None, url=None, transformation="None"):
                      "steps": steps,
                      "tools" : tools,
                      "primary method": None,
-                     "methods" : None,
+                     "methods" : methods,
                      "transformation" : transformation
                      }
 
