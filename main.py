@@ -64,8 +64,9 @@ def transform_vegetarian(parsed_recipe):
             "vegtables" : ["carrots", "onions", "broccoli", "cauliflower", "spinach", "lettuce", "tomato", "broccolini"]
             
         }
-    proteinMap = [["ground beef", "tofu"]]
-    changed = []
+    #print(food_dict[protein])
+    proteinMap = [["beef", "tofu"],["chicken", "chickpeas"], ["bacon", "imitation bacon"], ["burger patty", "impossible burger patty"], ["beef burger", "impossible burger patty"], ["burger", "impossible burger"]]
+    changed = {}
     ingredients = parsed_recipe['ingredients']
     steps = parsed_recipe['steps']
 
@@ -73,19 +74,54 @@ def transform_vegetarian(parsed_recipe):
         for j in range(len(ingredients)):
             if proteinMap[i][0] in ingredients[j]['name']:
                 t = ingredients[j]['name']
-                t = t.replace(proteinMap[i][0], proteinMap[i][1])
+                changed[proteinMap[i][0]] = t
+                t = proteinMap[i][1]
                 ingredients[j]['name'] = t
         for k in range(len(steps)):
             if proteinMap[i][0] in steps[k]:
                 t =steps[k]
-                t = t.replace(proteinMap[i][0], proteinMap[i][1])
-                steps[k] = t
+                if proteinMap[i][0] in changed and changed[proteinMap[i][0]] in steps[k]:
+                    t = t.replace(changed[proteinMap[i][0]], proteinMap[i][1])
+                    steps[k] = t
+                else: 
+                    t = t.replace(proteinMap[i][0], proteinMap[i][1])
+                    steps[k] = t
                # print(ingredients)
+    parsed_recipe['ingredients'] = ingredients
+    parsed_recipe['steps'] = steps
     print(ingredients)
     print(steps)
-
+    return parsed_recipe
 def transform_non_vegetarian(parsed_recipe):
-    raise NotImplementedError
+        #print(food_dict[protein])
+    proteinMap = [["beef steak", "tofu"],["chicken", "chickpeas"], ["bacon", "imitation bacon"], ["burger patty", "impossible burger patty"], ["beef burger", "impossible burger patty"], ["burger", "impossible burger"], ["ham", "mushroom"]]
+    changed = {}
+    ingredients = parsed_recipe['ingredients']
+    steps = parsed_recipe['steps']
+
+    for i in range(len(proteinMap)):
+        for j in range(len(ingredients)):
+            if proteinMap[i][1] in ingredients[j]['name']:
+                t = ingredients[j]['name']
+                changed[proteinMap[i][1]] = t
+                t = proteinMap[i][0]
+                ingredients[j]['name'] = t
+                print(t)
+        for k in range(len(steps)):
+            if proteinMap[i][1] in steps[k]:
+                t =steps[k]
+                if proteinMap[i][1] in changed and changed[proteinMap[i][1]] in steps[k]:
+                    t = t.replace(changed[proteinMap[i][1]], proteinMap[i][0])
+                    steps[k] = t
+                else: 
+                    t = t.replace(proteinMap[i][1], proteinMap[i][0])
+                    steps[k] = t
+               # print(ingredients)
+    parsed_recipe['ingredients'] = ingredients
+    parsed_recipe['steps'] = steps
+    print(ingredients)
+    print(steps)
+    return parsed_recipe
 
 def transform_healthy(parsed_recipe):
     ingredient_substitutes = {
@@ -192,8 +228,13 @@ def transform_east_asian(parsed_recipe):
         new_recipe["ingredients"][sub[0]]["name"] = substitutes[sub[1]][1]
     return new_recipe
 ####
-
-
+def double_or_half_amount(parsed_recipe, mul = 0):
+    ingredients = parsed_recipe["ingredients"]
+    x = 0.5 + 1.5*mul
+    for i in range(len(ingredients)):
+        ingredients[i]['quantity']=  ingredients[i]['quantity'] * x
+    parsed_recipe["ingredients"] = ingredients
+    return parsed_recipe
 if __name__ == "__main__":
     # Load in our config file
     with open("config.json") as f:
@@ -216,7 +257,7 @@ if __name__ == "__main__":
         parsed_recipe = parse_recipe(soup=soup, url=url_command[0], transformation=url_command[1])
         parsed_original_recipes.append(parsed_recipe)
 
-    example_parsed_recipe = parsed_original_recipes[4]  # to test out making a transformation on one recipe at a time
+    example_parsed_recipe = parsed_original_recipes[1]  # to test out making a transformation on one recipe at a time
 
 
     # output_string = StringOutputGenerator.create_string_from_recipe(example_parsed_recipe)
