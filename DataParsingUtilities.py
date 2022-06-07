@@ -29,7 +29,7 @@ def get_ingredients(soup=None) -> List[str]:
             split_ingred = ingred_text.split(" ")
             ingredient_name = ""
             for word in split_ingred[1::]:
-                if word not in FoodDataClass().measurements:
+                if word not in FoodDataClass().measurements and "(" not in word and ")" not in word:
                     ingredient_name += word + " "
             ingredient_name = ingredient_name.rstrip()
         else:
@@ -76,7 +76,15 @@ def get_quantity_measurement(ingrediant_str):
         quantity = sum([round(unicodedata.numeric(val), 2) for val in quantity]) # converts unicode to a float
     except:
         quantity =  "FAILED"
-    measurement = split_str[1]
+    if split_str[1] in FoodDataClass().measurements:
+        measurement = split_str[1]
+    else:
+        measurement = ""
+        for word in split_str[1:]:
+            measurement += word + " "
+            if ")" in word:
+                measurement.rstrip()
+                break
 
     return quantity, measurement
 
