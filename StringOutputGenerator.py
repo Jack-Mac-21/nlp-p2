@@ -28,6 +28,12 @@ def create_string_from_recipe(parsed_recipe, isTransformed=False):
     output_string += "\nURL: " + parsed_recipe["url"] + '\n' + \
                     single_line
 
+    #IS TRANSFORMED
+    if not isTransformed:
+        output_string += "ORIGINAL\n"
+    else:
+        output_string += "TRANSFORMED\n"
+
     #INGREDIANTS           
     output_string += "\n\nINGREDIENTS\n" + \
                     "--------------------------------------------\n"
@@ -72,4 +78,11 @@ def create_string_from_recipe(parsed_recipe, isTransformed=False):
 
     
     output_string += '\n\n' + single_line + single_line + single_line
+
+    if isTransformed:
+        with open("transformed_recipe.txt", 'w') as f:
+            f.write(output_string)
+    else:
+        with open("original_recipe.txt", 'w') as f:
+            f.write(output_string)
     return output_string
