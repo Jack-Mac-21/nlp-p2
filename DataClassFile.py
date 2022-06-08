@@ -13,8 +13,8 @@ class FoodDataClass():
         self.methods = ["bake", "broil", "sauté", "saute", "whisk", "scramble", "fold", "grate", "shred", "blend", "mix", "cover", "blend", "melt", "heat",
                         "cook", "fill"]
 
-        self.tools = ["pan", "skillet", "spatula", "whisk", "pot", "ladle", "knife", "cutting board", "strainer", "slotted spoon", "tongs", "julienne",
-                    "grater", "shredder", "blender", "saucepan", "oven"]
+        self.tools = ["pan", "skillet", "spatula", "whisk", "pot", "ladle", "knife", "board", "strainer", "tongs", "julienne",
+                    "grater", "shredder", "blender", "saucepan", "oven", "spoon", "towels", "bag"]
 
         self.cooking_stlyes = []
 

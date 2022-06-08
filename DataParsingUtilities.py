@@ -96,7 +96,7 @@ def get_tools(steps):
     for step in steps:
         split_step = re.split(r'[ .,\'()]', step)
         for word in split_step:
-            if word.lower in data_class.tools:
+            if word.lower() in data_class.tools:
                 tools.add(word)
     
     return tools
