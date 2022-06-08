@@ -94,6 +94,7 @@ def transform_vegetarian(parsed_recipe):
     print(ingredients)
     print(steps)
     return parsed_recipe
+
 def transform_non_vegetarian(parsed_recipe):
         #print(food_dict[protein])
     proteinMap = [["beef steak", "tofu"],["chicken", "chickpeas"], ["bacon", "imitation bacon"], ["burger patty", "impossible burger patty"], ["beef burger", "impossible burger patty"], ["burger", "impossible burger"], ["ham", "mushroom"]]
@@ -262,11 +263,11 @@ if __name__ == "__main__":
     example_parsed_recipe = parsed_original_recipes[1]  # to test out making a transformation on one recipe at a time
 
 
-    output_string = StringOutputGenerator.create_string_from_recipe(example_parsed_recipe)
+    output_string = StringOutputGenerator.create_string_from_recipe(example_parsed_recipe, isTransformed=False)
     print(output_string)
 
-    #transformed_recipe = transform_parsed_recipe(example_parsed_recipe)
-    #output_string = StringOutputGenerator.create_string_from_recipe(transformed_recipe)
+    transformed_recipe = transform_parsed_recipe(example_parsed_recipe)
+    output_string = StringOutputGenerator.create_string_from_recipe(transformed_recipe, isTransformed=True)
     #print(output_string)
-    # print(example_parsed_recipe["steps"])
+    #print(example_parsed_recipe["steps"])
     

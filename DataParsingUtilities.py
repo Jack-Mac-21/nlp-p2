@@ -98,7 +98,7 @@ def get_tools(steps):
         split_step = re.split(r'[ .,\'()]', step)
         for word in split_step:
             if word.lower() in data_class.tools:
-                tools.add(word)
+                tools.add(word.lower())
     
     return tools
 
@@ -111,6 +111,7 @@ def get_methods(steps):
         for word in re.split(r'[ .,\']',step):
             if word.lower() in FoodDataClass().methods:
                 methods[word.lower()] = methods.get(word, 0) + 1
+
     return methods
 
 # Getting the primary method of cooking
