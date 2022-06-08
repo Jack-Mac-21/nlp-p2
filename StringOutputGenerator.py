@@ -3,13 +3,14 @@ from RecipeParserClass import RecipeParser
 from DataParsingUtilities import *
 import json
 
-def create_string_from_recipe(parsed_recipe):
+def create_string_from_recipe(parsed_recipe, isTransformed=False):
     ingredients = parsed_recipe["ingredients"]
     steps = parsed_recipe["steps"]
     tools = parsed_recipe["tools"]
     title = parsed_recipe["title"]
     methods = parsed_recipe["methods"].keys()
     primary_method = parsed_recipe["primary_method"]
+    data = FoodDataClass()
 
 
     #Format strings
@@ -50,13 +51,13 @@ def create_string_from_recipe(parsed_recipe):
     output_string += single_small_line + single_small_line
     
     #METHODS
-    output_string +="\nPRIMARY METHOD -> " + primary_method + "\n"
+    output_string +="\nPRIMARY METHOD -> " + data.method_converter[primary_method] + "\n"
     output_string +="ALL METHODS: \n"
     output_string += "--------------------------------------------\n"
     
     i = 1
     for method in methods:
-        output_string += str(i) + ". " + method + '\n'
+        output_string += str(i) + ". " + data.method_converter[method] + '\n'
         i+=1
 
     output_string += single_small_line + single_small_line
