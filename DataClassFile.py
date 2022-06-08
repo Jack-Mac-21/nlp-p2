@@ -11,7 +11,7 @@ class FoodDataClass():
         "quarts", "quart", "pound", "pounds", "grams", "gram"]
 
         self.methods = ["bake", "broil", "sauté", "saute", "whisk", "scramble", "fold", "grate", "shred", "blend", "mix", "cover", "blend", "melt", "heat",
-                        "cook", "fill"]
+                        "cook", "fill", "mince", "chop", "cube", "stir", "roast" , "boil", "slice", "steam", "layer"]
 
         self.tools = ["pan", "skillet", "spatula", "whisk", "pot", "ladle", "knife", "cutting board", "strainer", "slotted spoon", "tongs", "julienne",
                     "grater", "shredder", "blender", "saucepan", "oven"]

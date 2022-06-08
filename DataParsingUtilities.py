@@ -80,11 +80,12 @@ def get_quantity_measurement(ingrediant_str):
         measurement = split_str[1]
     else:
         measurement = ""
-        for word in split_str[1:]:
-            measurement += word + " "
-            if ")" in word:
-                measurement.rstrip()
-                break
+        if "(" in split_str[1]:
+            for word in split_str[1:]:
+                measurement += word + " "
+                if ")" in word:
+                    measurement.rstrip()
+                    break
 
     return quantity, measurement
 
@@ -96,7 +97,7 @@ def get_tools(steps):
     for step in steps:
         split_step = re.split(r'[ .,\'()]', step)
         for word in split_step:
-            if word.lower in data_class.tools:
+            if word.lower() in data_class.tools:
                 tools.add(word)
     
     return tools
@@ -112,6 +113,20 @@ def get_methods(steps):
                 methods[word.lower()] = methods.get(word, 0) + 1
     return methods
 
+# Getting the primary method of cooking
+# returns a string that is the primary method
+def get_primary_method(methods_dict):
+    max_count = 0
+    prime_method = None
+
+    methods = methods_dict.keys()
+    for method in methods:
+        value = methods_dict[method]
+        if value > max_count:
+            max_count = value
+            prime_method = method
+    
+    return prime_method
 
 if __name__ == "__main__":
     ingredients = get_ingredients(url="https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/")

@@ -8,6 +8,9 @@ def create_string_from_recipe(parsed_recipe):
     steps = parsed_recipe["steps"]
     tools = parsed_recipe["tools"]
     title = parsed_recipe["title"]
+    methods = parsed_recipe["methods"].keys()
+    primary_method = parsed_recipe["primary_method"]
+
 
     #Format strings
     single_line = "-------------------------------------------------------------------------------------\n"
@@ -18,7 +21,7 @@ def create_string_from_recipe(parsed_recipe):
     output_string = single_line +single_line+single_line
 
     #TITLE
-    output_string += "\nTITLE: " + parsed_recipe["title"]
+    output_string += "\nTITLE: " + title
 
     #URL
     output_string += "\nURL: " + parsed_recipe["url"] + '\n' + \
@@ -34,6 +37,8 @@ def create_string_from_recipe(parsed_recipe):
                         "\nAmount: " + str(ingredient["quantity"]) + " " + ingredient["measurement"] +'\n'
 
     output_string += single_small_line + single_small_line
+
+    #TOOLS
     output_string +="\nTOOLS: \n"
     output_string += "--------------------------------------------\n"
     
@@ -43,8 +48,20 @@ def create_string_from_recipe(parsed_recipe):
         i+=1
 
     output_string += single_small_line + single_small_line
+    
+    #METHODS
+    output_string +="\nPRIMARY METHOD -> " + primary_method + "\n"
+    output_string +="ALL METHODS: \n"
+    output_string += "--------------------------------------------\n"
+    
+    i = 1
+    for method in methods:
+        output_string += str(i) + ". " + method + '\n'
+        i+=1
 
+    output_string += single_small_line + single_small_line
 
+    #STEPS
     output_string +="\nSTEPS: \n"
     output_string += "--------------------------------------------\n"
 
