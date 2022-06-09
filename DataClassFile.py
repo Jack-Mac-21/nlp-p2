@@ -4,7 +4,10 @@ class FoodDataClass():
         self.food_dictionary = {
             "protein" : ["chicken", "fish", "salmon", "shrimp", "steak", "beef", "tofu", "pork", "bacon"],
             "vegtable_protein" : ["tofu", "impossible meat", "veggie burger", "plant based burger"],
-            "vegtables" : ["carrots", "onions", "broccoli", "cauliflower", "spinach", "lettuce", "tomato", "broccolini"]
+            "vegtables" : ["carrots", "onions", "broccoli", "cauliflower", "spinach", "lettuce", "tomato", "broccolini", "bell"],
+            "spices": ["cumin", "cilantro", "cinnamon", "mustard", "garlic", "ginger", "nutmeg", "coriander",
+            "curry", "lemon", "saffron", "paprika", "turmeric", "miso", "wasabi", "jalapeno", "chili", "parsley",
+            "mint", "vanilla"]
             
         }
         self.measurements = ["teaspoons", "teaspoon", "ounce", "ounces", "tablespoon", "tablespoons", "cups", "cup", "pint","pints",
